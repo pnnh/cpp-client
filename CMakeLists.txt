@@ -4,7 +4,12 @@ project(cpp-client)
 set(CMAKE_VERBOSE_MAKEFILE on)
 set(CMAKE_CXX_STANDARD 20)
 
+#set(CMAKE_OSX_SYSROOT /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk")
+
 message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
+message(STATUS "CMAKE_OSX_SYSROOT: ${CMAKE_OSX_SYSROOT}")
+message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 
 find_package(PkgConfig REQUIRED)
 
@@ -25,4 +30,4 @@ endif (folly_FOUND)
 find_package(gflags REQUIRED)
 message(STATUS "Found gflags: ${gflags_INCLUDE_DIRS} : ${gflags_LIBRARIES}")
 
-add_executable(client src/main.cc)
+add_executable(client src/main.cc src/process.cc)
