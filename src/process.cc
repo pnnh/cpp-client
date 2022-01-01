@@ -2,16 +2,17 @@
 // Created by Larry on 2021/12/31.
 //
 
+#include <iostream>
 #include "process.h"
 
-process::child start_child() {
-  std::string exec = "bjam";
-  std::vector<std::string> args;
-  args.push_back("bjam");
-  args.push_back("--version");
+void start_child() {
+  process::ipstream pipe_stream;
+  process::child c("ls -l", process::std_out > pipe_stream);
 
-  process::context ctx;
-  ctx.stdout_behavior = process::capture_stream();
+  std::string line;
 
-  return process::launch(exec, args, ctx);
+  while (pipe_stream && std::getline(pipe_stream, line) && !line.empty())
+    std::cout << line << std::endl;
+
+  c.wait();
 }

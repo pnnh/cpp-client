@@ -12,6 +12,6 @@
 
 namespace process = ::boost::process;
 
-process::child start_child();
+void start_child();
 
 #endif //CPP_CLIENT_PROCESS_H
