@@ -10,7 +10,7 @@ message(STATUS "CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 
 find_package(PkgConfig REQUIRED)
 
-find_package(Boost COMPONENTS system filesystem thread REQUIRED)
+find_package(Boost COMPONENTS system filesystem thread log date_time REQUIRED)
 if (Boost_FOUND)
     message(STATUS "Found Boost: ${Boost_LIBRARIES}")
     INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIRS})
@@ -27,4 +27,4 @@ endif (folly_FOUND)
 find_package(gflags REQUIRED)
 message(STATUS "Found gflags: ${gflags_INCLUDE_DIRS} : ${gflags_LIBRARIES}")
 
-add_executable(client src/main.cc src/process.cc)
+add_executable(client src/main.cc src/process.cc src/logger/logger.cc)
